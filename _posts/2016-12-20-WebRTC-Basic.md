@@ -59,6 +59,7 @@ var UserMedia = (function (){
 })();
 ```
 	사용법은 아래와 같다.
+
 ```
 UserMedia({video: true, audio: true}, function(stream){
 	
@@ -66,9 +67,13 @@ UserMedia({video: true, audio: true}, function(stream){
 	
 });
 ```
-	첫번째 인자로 미디어 비디오와 오디오에 대한 constraints 를 지정할 수 있다. 비디오는 resolution, frame rate 에 대해 지정할 수 있다.
+
+	첫번째 인자로 미디어 비디오와 오디오에 대한 constraints 를 지정할 수 있다. 비디오는 resolution, frame rate 에 대해 지정할 수 있다. 자세한 지정 방법은 [https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) 에서 확인할 수 있다.
+
 
 - PeerConnection
+	거의 모든 일을 처리하는 객체이다. signal processing, Security, encode, decode, NAT traversal, packet send/receive, bandwidth estimation etc..
+
 - DataChannel
 
 ### ORTC
