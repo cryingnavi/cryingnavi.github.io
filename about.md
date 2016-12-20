@@ -8,7 +8,9 @@ Web Developer.
 
 
 ### 개인프로젝트
-#### x-ui
+- x-ui
+	- github : https://github.com/cryingnavi/x-ui
+	- DEMO : http://cryingnavi.github.io/x-ui-doc/
 
 ### More Information
 
