@@ -58,6 +58,7 @@ var UserMedia = (function (){
 	return getUserMedia;
 })();
 ```
+
 	사용법은 아래와 같다.
 
 ```
