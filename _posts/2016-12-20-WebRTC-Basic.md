@@ -39,7 +39,7 @@ WebRTC 는 웹기반으로 플러그인 없이 실시간 미디어 통신을 구
 - ICE
 
 ### 시그널링
-```html
+```
 function test() {
   console.log("notice the blank line before this function?");
 }
