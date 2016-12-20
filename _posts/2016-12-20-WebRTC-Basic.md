@@ -47,12 +47,27 @@ function test() {
 
 ### Main API's
 - getUserMedia
-	getUserMedia 는 사용자 단말기의 카메라와 마이크에 액세스 할 수 있는 방법을 제공한다.
-```html
-function test() {
-  console.log("notice the blank line before this function?");
-}
+	getUserMedia 는 사용자 단말기의 카메라와 마이크에 액세스 할 수 있는 방법을 제공한다. 일단 브라우저마다 제공하고 있는 함수의 이름이 다르므로 아래와 같이 표준화 한다.
+
 ```
+var UserMedia = (function (){
+	var getUserMedia = navigator.getUserMedia || 
+		navigator.webkitGetUserMedia || 
+		navigator.mozGetUserMedia || 
+		navigator.msGetUserMedia;
+	return getUserMedia;
+})();
+```
+	사용법은 아래와 같다.
+```
+UserMedia({video: true, audio: true}, function(stream){
+	
+}, function(e){
+	
+});
+```
+	첫번째 인자로 미디어 비디오와 오디오에 대한 constraints 를 지정할 수 있다. 비디오는 resolution, frame rate 에 대해 지정할 수 있다.
+
 - PeerConnection
 - DataChannel
 
