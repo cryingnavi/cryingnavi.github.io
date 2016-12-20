@@ -42,6 +42,10 @@ WebRTC 는 웹기반으로 플러그인 없이 실시간 미디어 통신을 구
 
 ### Main API's
 - getUserMedia
+	getUserMedia 는 사용자 단말기의 카메라와 마이크에 액세스 할 수 있는 방법을 제공한다.
+	`​`` html
+<a href="#">Hello world</a>
+`​``
 - PeerConnection
 - DataChannel
 
