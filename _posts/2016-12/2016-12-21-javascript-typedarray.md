@@ -40,7 +40,7 @@ TypedArray 를 사용하기 위해서는 두가지만 기억하면 된다. 바�
 | Int32Array | -2,147,483,648 ~ 2,147,483,647 |	부호있는 32비트 정수 | int |
 | Uint32Array | 0 ~ 4,294,967,295|부호없는 32비트 정수 | unsigned int |
 | Float32Array | -3.4 x 10의 38승 ~ 3.4 x 10의 38승 | 32-bit IEEE floating point number | float |
-| Float64Array | -1.79 x 10의 308승 ~ 1.79 x 10의 308승 | 64-bit IEEE floating point number| double |
+| Float64Array | -1.79 x 10의 308승 ~ 1.79 x 10의 308승 | 64-bit IEEE floating point number | double |
 
 
 
