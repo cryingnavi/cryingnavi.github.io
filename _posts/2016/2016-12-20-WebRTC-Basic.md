@@ -152,6 +152,5 @@ var pc = new PeerConnection({
 ```
 
 
-#### DataChannel
 
 ### ORTC
