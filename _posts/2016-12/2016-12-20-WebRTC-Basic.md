@@ -14,7 +14,7 @@ WebRTC 의 비전은 웹어플리케이션에서 비디오 채팅, Peer 간의 �
 
 현재 IETE 에서 관련 프로토콜을 정의 하고 있으며, W3C 에서는 API 에 대한 표준화를 진행하고 있다. 2016년 9월. WebRTC 의 정식 버전인 1.0 버전이 공식 릴리즈 되었다.
 
-WebRTC 의 기능을 간편하게 체험할 수 있는 방법이 있으며  아래 주소를 크롬 또는 파이어 폭스로로 접속하여 실행해 볼 수 있다.
+WebRTC 의 기능을 간편하게 체험할 수 있는 방법이 있으며  아래 주소를 크롬 또는 파이어 폭스로 접속하여 실행해 볼 수 있다.
 
 [https://apprtc.appspot.com/](https://apprtc.appspot.com/)
 
@@ -36,6 +36,7 @@ WebRTC API 를 활용하여 사용자에 의해 구현된 어플리케이션이�
 
 #### WebRTC API
 웹 브라우저 상에서 자바스크립트로 이용되어질 수 있는 WebRTC API를 지칭한다. WebRTC API 는 크게 세 가지로 나눌 수 있다. getUserMedia, PeerConnection, DataChannel이다.
+
 - getUserMedia : 사용자 단말기의 미디어 장치를 액세스할 수 있는 방법을 제공한다. 미디어 장치라 함은 마이크와 웹캠을 의미한다. getUserMedia 를 통해 미디어 장치를 액세스 하게 되면 미디어 스트림 객체를 얻을 수 있으며 이를 PeerConnection 에 전달하여 미디어 스트림을 전송하게 된다.
 - PeerConnection : 가장 중요한 API 이면서 Peer 간의 화상과 음성 등을 교환하기 위한 거의 모든 작업을 수행하는 API 이다. 기본적인 기능은 Singal Processing, Security, 비디오 encode/decode, 네트워크와 관련된 NAT Traversal, Packet send/receive, bandwidth estimation 등이 있다.
 - DataChannel : Peer 간에 텍스트나 파일을 주고 받을 수 있는 메시징 API 이다. 설정에 따라 SCTP 또는 RTP 로 전송할 수 있다. DataChannel 은 WebSocket 과 같은 수준의 API 를 제공하며 이는 Row Level API 라 할 수 있다. 대용량 파일을 주고받기 위해서는 이 API 를 활용한 어플리케이션 단의 테크닉이 필요하다.
