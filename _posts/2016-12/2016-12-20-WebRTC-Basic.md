@@ -152,6 +152,44 @@ var pc = new PeerConnection({
 });
 ```
 
+### WebRTC P2P 연결 플로우
+WebRTC 어플리케이션은 P2P 연결을 위해 시그널링이라는 과정을 반드시 거쳐야 한다. 이는 Peer 간의 서로를 식별하기 위한 과정으로 서버가 반드시 중계해주어야한다.
+아래는 WebRTC 어플리케이션 아키텍처이다. 구름 모양의 그림이 시그널링 서버이다.
+
+시그널 서버는 채팅방과 같은 형태로 연결하고자 하는 Peer 들을 논리적으로 묶고 서로간에 SDP 와 Candidate 를 교환하여 주면 된다.
+
+![_config.yml]({{ site.baseurl }}/images/jsep.png)
+
+- Offer SDP 생성
+
+```
+pc.createOffer(function(offerSdp){
+	pc.setLocalDescription(offerSdp);
+	socket.emit(“sendOfferSDP”, offerSdp);
+}, function(){
+```
+
+- Answer SDP 생성
+
+```
+pc.setRemoteDescription(new RTCSessionDescription(offerSdp));
+pc.createAnswer(function(answerSdp){
+		pc.setLocalDescription(answerSdp);
+		socket.emit(“sendAnswerSDP”, answerSdp);
+}, function(){
+		//error
+});
+```
+
+- Candidate 생성
+
+```
+pc.onicecandidate = function(){
+	if(e.candidate){
+		socket.emit(“sendCandidate”, e.candidate);
+	}
+};
+```
 
 
 ### ORTC
