@@ -47,6 +47,7 @@ var view = new DataView(buf);
 뷰를 생성했다면, 뷰의 메소드들을 사용할 수 있다. 뷰의 get/set 메소드드들은 아래와 같은 것들이 있다.
 
 #### set
+
 | 이름 | 설명 |
 | -------- | -------- |
 | setInt8 | 1 바이트 크기의 value 를 설정한다 |
@@ -59,6 +60,7 @@ var view = new DataView(buf);
 | setFloat64 | 8 바이트 크기의 value 를 설정한다 |
 
 #### get
+
 | 이름 | 설명 |
 | ----- | ----- |
 | getInt8 | 1 바이트 크기의 value 를 반환한다 |
