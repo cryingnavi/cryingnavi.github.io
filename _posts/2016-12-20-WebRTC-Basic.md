@@ -100,6 +100,7 @@ UserMedia({video: true, audio: true}, function(stream){
 거의 모든 일을 처리하는 객체이다. signal processing, Security, encode, decode, NAT traversal, packet send/receive, bandwidth estimation etc..
 
 브라우저마다 제공하고 있는 함수의 이름이 다르므로 아래와 같이 표준화 한다.
+
 ```
 var PeerConnection = (function(){
 	var PeerConnection = window.PeerConnection ||
