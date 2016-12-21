@@ -12,7 +12,7 @@ WebRTC 란 웹 브라우저만으로 실시간 화상 통신을 구현할 수 �
 
 WebRTC 의 비전은 웹어플리케이션에서 비디오 채팅, Peer 간의 데이터 공유를 손쉽게 구현하고 전화기, TV, 컴퓨터가 모두 공통 플랫폼 위에서 대화할 수 있도록 하는 것이다. 웹 브라우저만이라고는 하지만 실제 서비스에 적용된 모습을 살펴보면 웹브라우저, 모바일 네이티브 어플리케이션을 가리지 않는다. 이는 WebRTC 가 오픈소스이며 이를 직접 빌드하여 사용할 수 있기 때문이다.
 
-현재 IETE 에서 관련 프로토콜을 정의 하고 있으며, W3C 에서는 API 에 대한 표준화를 진행하고 있다. 2016년 9월. WebRTC 의 정식 버전인 1.0 버전이 공식 릴리즈 되었다.
+현재 WebRTC 는 2016년 9월 1.0 버전이 정식 릴리즈 되었으며 IETE 에서 관련 프로토콜을 정의 하고 있으며, W3C 에서는 API 에 대한 표준화를 진행하고 있다. 2016년 9월. WebRTC 의 정식 버전인 1.0 버전이 공식 릴리즈 되었다.
 
 WebRTC 의 기능을 간편하게 체험할 수 있는 방법이 있으며  아래 주소를 크롬 또는 파이어 폭스로 접속하여 실행해 볼 수 있다.
 
@@ -64,9 +64,9 @@ STUN 을 통해 통신 설정을 시도 했지만 실패하고 Peer 가 결국 �
 Peer 간의 모든 트래픽을 중계해 주어야 하므로 상당한 부하를 감당해 내야만 한다. 그러므로 실제 서비스에서 가장 큰 비용이 드는 부분이다.
 
 - TURN 을 사용하게끔되는 순서는 다음과 같다.
-		- PeerConnection 객체는 UDP 로 통신 설정을 시도
-		- UDP 실패시 TCP로 시도한다.
-		- TCP 마저 실패시 모든 정보는 TURN 서버에 의해 릴레이
+ - PeerConnection 객체는 UDP 로 통신 설정을 시도
+ - UDP 실패시 TCP로 시도한다.
+ - TCP 마저 실패시 모든 정보는 TURN 서버에 의해 릴레이
 
 ![_config.yml]({{ site.baseurl }}/images/Webrtc-turn.png)
 [TURN]
@@ -111,7 +111,7 @@ var UserMedia = (function (){
 사용법은 아래와 같다.
 
 ```
-UserMedia({video: true, audio: true}, function(stream){
+UserMedia({video: true, audio: true}, 		function(stream){
 
 }, function(e){
 
@@ -191,5 +191,17 @@ pc.onicecandidate = function(){
 };
 ```
 
+### 기술 동향(2016.12)
+WebRTC 는 open source 중 가장 활발한 활동을 하고 있는 곳이다. 그러므로 빈번한 릴리즈가 발생한다. 아래 URL 에서 HEAD 파일 기준으로 최근 변동 사항을 알 수 있다.
 
-### ORTC
+[WebRTC HEAD](https://chromium.googlesource.com/external/webrtc/+log/HEAD)
+
+- H.264 코덱이 WebRTC 에 기본 탑재됨
+- 애플이 사파리 브라우저에 WebRTC를 탑재하기 위해 개발중
+- MS Edge 가 ORTC를 제공하나 현재 WebRTC 와 호환되지 않음
+- 파이어폭스와 크롬에서 현재 로컬에서 미디어를 레코딩할 수 있는 API 제공하고 있음
+- Peer 간 스크린 쉐어 개발중
+- 보내는 측에서 밴드위드스에 따른 품질 변화 개발중(Send sid bandwidth estimation)
+- 360도 카메라 고려중
+- Simulcast 고려중
+- 데이터 채널의 성능 향상을 위해 QUIC 프로토콜 도입 고려중
