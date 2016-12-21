@@ -117,7 +117,7 @@ view.getInt16(6);
 0 번째부터 2바이트를 읽으므로 위치를 0, 2, 4, 6 으로 지정하였다.
 
 
-### 특정형태의 데이터 뷰 생성하기
+### 특정 형태의 데이터 뷰 생성하기
 
 ```
 var view = new Uint8Array(buf);
@@ -151,6 +151,56 @@ view[7]; //8
 ```
 
 ### 한글 인코딩하기
+Uint8Array 로 생성한 뷰에 한글을 데이터로 설정하려면 어떻게 해야하는 것일까? 일단 charCodeAt 메소드를 이용하여 문자의 유니코드 값을 반환받는다. 그런데 영문이 아닌 경우 유니코드 값은 255 가 넘어 갈 것이다. 자료형이 표현할 수 있는 범위를 넘어서는 것이다. 이 경우 Uint8Array 의 뷰에 2 바이트를 차지하도록 데이터를 설정해야하는 것이다.
 
+```
+var view = new Uint8Array(buf);
+view[0] = xxx;
+view[1] = xxx;
+//위 두바이트가 한글자이다.
+```
 
-계속 쓸 예정....
+위와 같이 설정하려면 어떻게 해야할까? 이는 비트연산과 논리곱을 통해 수행할 수 있다.
+
+```
+var text = "가나다라마바사";
+var buf = new ArrayBuffer(text.length * 2);
+var view = new Uint8Array(buf);
+var unicode = 0;
+var index = 0;
+
+for(var i=0; i<text.length; i++){
+  unicode = text.charCodeAt(i);
+  view[index] = unicode >>> 8;
+  view[index + 1] = unicode & 0xFF;
+  index = index + 2;
+}
+```
+
+우선 각 문자에 대한 유니코드 값을 반환받는다. "가"의 경우 10진수 유니코드 값은 44032 이다. 이를 오른쪽으로 1바이트만큼 비트연산을 수행하면 172 가 된다. 이를 2 바이트의 첫번째 바이트에 저장한다. 그리고 유니코드 값에 255를 논리곱을 수행하여 두번째 바이트에 저장한다. 이렇게 하면 첫번째 바이트에는 172, 두번째 바이트에는 0 이 저장되었을 것이다.
+
+이를 다시 원래 문자로 읽기 위해서는 다음과 같이 한다.
+
+```
+var text2 = "";
+for(var i=0; i<view.length; i=i+2){
+  unicode = (view[i] * 255) + view[i] + view[i + 1];
+  text2 = text2 + String.fromCharCode(unicode);
+}
+```
+
+공식은 다음과 같다.
+```
+(비트연산의 값 * 255) + 비트연산의 값 + 논리곱의 값
+```
+
+데이터뷰를 사용하여 읽을 경우, 2바이트를 한꺼번에 읽을 수 있다. 위 공식을 적용한 것과 같은 결과를 반환한다.
+
+```
+var text2 = "";
+var dataView = new DataView(buf);
+for(var i=0; i<dataView.byteLength; i=i+2){
+  unicode = dataView.getUint16(i);
+  text2 = text2 + String.fromCharCode(unicode);
+}
+```
