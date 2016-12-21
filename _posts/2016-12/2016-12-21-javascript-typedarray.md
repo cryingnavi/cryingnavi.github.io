@@ -84,7 +84,7 @@ view.setInt8(6, 7);
 view.setInt8(7, 8);
 ```
 
-첫밴째 인자는 값을 설정하는 버퍼의 위치이다. 그리고 두번째 인자는 해당 위치에 설정되는 값이다.
+첫번째 인자는 값을 설정하는 버퍼의 위치이다. 그리고 두번째 인자는 해당 위치에 설정되는 값이다.
 
 ```
 view.getInt8(0); //0번째 위치의 값을 반환. 1
@@ -109,10 +109,10 @@ view.setInt16(6, 32004);
 ```
 
 ```
-view.getInt16(0);
-view.getInt16(2);
-view.getInt16(4);
-view.getInt16(6);
+view.getInt16(0); //32001
+view.getInt16(2); //32002
+view.getInt16(4); //32003
+view.getInt16(6); //32004
 ```
 0 번째부터 2바이트를 읽으므로 위치를 0, 2, 4, 6 으로 지정하였다.
 
@@ -126,6 +126,7 @@ var view = new Uint8Array(buf);
 해당 view 는 unsigned char 형태의 데이터만 읽거나 쓸 수 있다. 고로 해당 뷰는 0 ~ 255 까지의 데이터만을 설정할 수 있는 것이다.
 
 해당 뷰에 데이터를 쓰기 위해서는 아래와 같이 한다.
+
 ```
 view[0] = 1;
 view[1] = 2;
@@ -151,13 +152,13 @@ view[7]; //8
 ```
 
 ### 한글 인코딩하기
-Uint8Array 로 생성한 뷰에 한글을 데이터로 설정하려면 어떻게 해야하는 것일까? 일단 charCodeAt 메소드를 이용하여 문자의 유니코드 값을 반환받는다. 그런데 영문이 아닌 경우 유니코드 값은 255 가 넘어 갈 것이다. 자료형이 표현할 수 있는 범위를 넘어서는 것이다. 이 경우 Uint8Array 의 뷰에 2 바이트를 차지하도록 데이터를 설정해야하는 것이다.
+Uint8Array 로 생성한 뷰에 한글을 데이터로 설정하려면 어떻게 해야하는 것일까? 일단 charCodeAt 메소드를 이용하여 문자의 유니코드 값을 반환받는다. 그런데 영문이 아닌 경우 유니코드 값은 255 가 넘어 갈 것이다. 자료형이 표현할 수 있는 범위를 넘어서는 것이다. 이 경우 Uint8Array 의 뷰에 2 바이트를 차지하도록 데이터를 설정해야 한다.
 
 ```
 var view = new Uint8Array(buf);
 view[0] = xxx;
 view[1] = xxx;
-//위 두바이트가 한글자이다.
+//위 두바이트가 한 글자이다.
 ```
 
 위와 같이 설정하려면 어떻게 해야할까? 이는 비트연산과 논리곱을 통해 수행할 수 있다.
@@ -190,6 +191,7 @@ for(var i=0; i<view.length; i=i+2){
 ```
 
 공식은 다음과 같다.
+
 ```
 (비트연산의 값 * 255) + 비트연산의 값 + 논리곱의 값
 ```
@@ -203,4 +205,64 @@ for(var i=0; i<dataView.byteLength; i=i+2){
   unicode = dataView.getUint16(i);
   text2 = text2 + String.fromCharCode(unicode);
 }
+```
+
+### TypedArray 를 이용하여 파일 전송하기
+위에서 언급한 것처럼 WebRTC 나 WebSocket 을 이용하여 대용량 파일을 전송할 경우 TypedArray 를 이용하여 바이트로 전송할 수 있다. 대용량의 경우, 한번에 전송할 수 없으면 적절한 청크 사이즈만큼 잘라서 전송해야한다. 이 경우 송신측과 수신측이 바이트배열의 포맷을 미리 약속해 두어야하는데 예를 들어 다음과 같다
+
+```
+0 ~ 7 처음 8 바이트까지는 보내는 파일에 대한 유니크한 아이디값
+8 ~ 15 그다음 8바이트는 파일의 용량
+16 ~ 270 그다음 255 바이트는 파일의 mimeType
+271 ~ 525 그다음 255 바이트 파일명
+526 ~ 529 그다음 4바이트는 청크사이즈만큼 자른 후의 보낼 횟수. 곧 페이지의 전체 크기
+```
+
+이제 실제 바이트배열로 변환해 보겠다.
+
+```
+var headerBuf = new ArrayBuffer(530);
+var headerDv = new DataView(headerBuf);
+headerDv.setFloat64(0, "유니크ID");
+headerDv.setFloat64(12, totalSize);
+
+//mimeType 은 2바이트 처리한다.
+for (var i = 16; i<271; i=i+2) {
+  tmp = mimeType.charCodeAt(j);
+  if(tmp){
+    headerDv.setUint8(i, tmp >>> 8);
+    headerDv.setUint8(i+1, tmp & 0xFF);
+    //headerDv.setUint16(tmp); //혹은 tmp 를 2바이트를 차지하도록 바로 저장할 수 있다.
+  }
+}
+
+//file name 은 2바이트 처리한다.
+for (var i = 271; i<526; i=i+2) {
+  tmp = fileName.charCodeAt(j);
+  if(tmp){
+    headerDv.setUint8(i, tmp >>> 8);
+    headerDv.setUint8(i+1, tmp & 0xFF);
+    //headerDv.setUint16(tmp); //혹은 tmp 를 2바이트를 차지하도록 바로 저장할 수 있다.
+  }
+}
+
+headerDv.setInt32(526, Math.ceil(fileSize / chunkSize));
+
+
+//websocket send
+websocket.send(headerBuf);
+```
+
+위와 같이 파일에 헤더값을 바이트배열로 변환하여 수신측에 전송하여 파일 전송을 알린다. 그리고 그 다음부터 본격적으로 파일을 청크 사이즈 만큼 전송한다. 이때도 역시 포맷을 미리 약속해야 한다.
+
+```
+0 ~ 7 처음 8 바이트까지는 보내는 파일에 대한 유니크한 아이디값
+8 ~ 11 그다음 4바이트는 청크사이즈만큼 자른 후의 보낼 횟수. 곧 페이지의 전체 크기
+12 ~ 15 그다음 4바이트는 현재 보내고 있는 페이지 인덱스. 1씩 증가하면서 페이지의 전체 크기만큼 증가할 것이다.
+16 ~ 청크사이즈만큼 그다음 크기는 청크사이즈만큼 자른 파일을 전송한다.
+```
+
+파일을 실제 보내보겠다.
+```
+
 ```
