@@ -4,6 +4,12 @@ title: "Javascript-TypedArray"
 date: "2016-12-21 11:41"
 ---
 
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
 
 Javascript 에서는 원시 이진 데이터를 컨트롤 할 수 있다. 이를 Typed Array 라 한다.
 이를 사용하면 텍스트나 파일을 바이트 형태로 전송할 수 있다.
