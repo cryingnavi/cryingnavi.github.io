@@ -6,13 +6,18 @@ date: "2016-12-20 11:41"
 
 ### webrtc is
 
-WebRTC 는 웹기반으로 플러그인 없이 실시간 미디어 통신을 구현할 수 있는 표준이다. 기존에는 웹에서 실시간 화상/음성 통신을 수행하기 위해서는 ActiveX 나 flash 와 같은 형태의 플러그인이 필요했었다. 그러나 WebRTC 가 브라우저에 기본 탑재되면서 플러그인 없이 Javascript API 만으로도 브라우저에서 실시간 화상/음성 통신을 구현할 수 있게 되었다.
+기존에는 플래시와 같은 별도의 플러그인 또는 서드 파티 소프트웨어로 웹 브라우저 상에서 화상 통신과 같은 서비스를 구현했었다. 그러나 WebRTC 가 브라우저에 기본 탑재되면서 이러한 플러그인 없이 웹 브라우저 간에 실시간 커뮤니케이션을 수행할 수 있게 되었다.
 
-또한 WebRTC를 Android, IOS 형태로 빌드 할 수 있으며 이를 직접 빌드하면, 모바일 네이티브에서도 사용할 수 있다.
+WebRTC 란 웹 브라우저만으로 실시간 화상 통신을 구현할 수 있는 API 이다. 이는 웹 브라우저 만으로 Peer 간에 음성, 영상, 파일을 직접 주고 받을 수 있다는 것이며 구글의 행아웃이 대표적인 서비스할 수 있다.
 
-비디오, 오디오, Data(Text & File)를 Peer 간에 직접 주고 받을 수 있다.
+WebRTC 의 비전은 웹어플리케이션에서 비디오 채팅, Peer 간의 데이터 공유를 손쉽게 구현하고 전화기, TV, 컴퓨터가 모두 공통 플랫폼 위에서 대화할 수 있도록 하는 것이다. 웹 브라우저만이라고는 하지만 실제 서비스에 적용된 모습을 살펴보면 웹브라우저, 모바일 네이티브 어플리케이션을 가리지 않는다. 이는 WebRTC 가 오픈소스이며 이를 직접 빌드하여 사용할 수 있기 때문이다.
 
 현재 IETE 에서 관련 프로토콜을 정의 하고 있으며, W3C 에서는 API 에 대한 표준화를 진행하고 있다. 2016년 9월. WebRTC 의 정식 버전인 1.0 버전이 공식 릴리즈 되었다.
+
+WebRTC 의 기능을 간편하게 체험할 수 있는 방법이 있으며  아래 주소를 크롬 또는 파이어 폭스로로 접속하여 실행해 볼 수 있다.
+
+[https://apprtc.appspot.com/](https://apprtc.appspot.com/)
+
 
 ![_config.yml]({{ site.baseurl }}/images/webrtc-browser.png)
 [2016.12.20] 현재 브라우저 지원현황
@@ -21,11 +26,28 @@ WebRTC 는 웹기반으로 플러그인 없이 실시간 미디어 통신을 구
 - 사파리는 현재 WebRTC를 구현중이며 2017년 릴리즈 될것으로 보인다.
 
 
-### 주요 용어 정리
+### WebRTC 기반 기술 이해하기
+WebRTC 전체 아키텍처 그림을 기반으로 각 용어가 무엇을 의미하는지 살펴본다.
 
-#### NAT
-Network Address Translation 의 약자.
-NAT 는 주소 고갈 문제로 임시 개발 되었으며, 즉 회사 네트워크 같은 사설망에 존재하는 사설 IP 주소를 공인 IP 주소로 변경해주는 주소 변환기 이다.
+![_config.yml](https://webrtc.org/assets/images/webrtc-public-diagram-for-website.png)
+
+#### Your Web App
+WebRTC API 를 활용하여 사용자에 의해 구현된 어플리케이션이다. 해당 어플리케이션은 화상, 음성, 또는 메시징(파일, 텍스트) 서비스를 수행하는 어플리케이션이다.
+
+#### WebRTC API
+웹 브라우저 상에서 자바스크립트로 이용되어질 수 있는 WebRTC API를 지칭한다. WebRTC API 는 크게 세 가지로 나눌 수 있다. getUserMedia, PeerConnection, DataChannel이다.
+- getUserMedia : 사용자 단말기의 미디어 장치를 액세스할 수 있는 방법을 제공한다. 미디어 장치라 함은 마이크와 웹캠을 의미한다. getUserMedia 를 통해 미디어 장치를 액세스 하게 되면 미디어 스트림 객체를 얻을 수 있으며 이를 PeerConnection 에 전달하여 미디어 스트림을 전송하게 된다.
+- PeerConnection : 가장 중요한 API 이면서 Peer 간의 화상과 음성 등을 교환하기 위한 거의 모든 작업을 수행하는 API 이다. 기본적인 기능은 Singal Processing, Security, 비디오 encode/decode, 네트워크와 관련된 NAT Traversal, Packet send/receive, bandwidth estimation 등이 있다.
+- DataChannel : Peer 간에 텍스트나 파일을 주고 받을 수 있는 메시징 API 이다. 설정에 따라 SCTP 또는 RTP 로 전송할 수 있다. DataChannel 은 WebSocket 과 같은 수준의 API 를 제공하며 이는 Row Level API 라 할 수 있다. 대용량 파일을 주고받기 위해서는 이 API 를 활용한 어플리케이션 단의 테크닉이 필요하다.
+
+#### WebRTC Native
+WebRTC Native 는 C++ 로 작성되어 있으며 오픈소스이다. WebRTC 네이티브는 오디오(Voice Engine), 비디오(Video Engine), 네트워크(Transport) 관련된 기능으로 세 개의 파트로 나뉘어진다
+
+#### Voice Engine
+보이스 엔진은 사용자 단말기의 사운드 카드부터 네트워크에 이르는 일련의 과정을 컨트롤 하는 프레임워크이다. iSAC / iLBC / Opus 와 같은 음성 코덱을 지원하며 AEC(에코 캔슬) 과 노이즈 제거 기능을 가지고 있다. (AEC 와 노이즈 관련 기능은 현재 계속적으로 성능이 개선되고 있다.)
+
+#### Video Engine
+보이스 엔진과 마찬가지로 사용자 단말기의 카메라에서 부터 네트워크까지 이르는 일련의 기능을 수행하는 프레임워크이다.
 
 #### STUN
 STUN 서버는 네트웍 장비의 일환이다. 서로 연결하고자 하는 Peer 들이 NAT나 방화벽 뒤에 존재하는 지 검사하고 이들의 공인 IP 주소를 전달하는 역할을 수행한다.
@@ -95,7 +117,7 @@ UserMedia({video: true, audio: true}, function(stream){
 });
 ```
 
-첫번째 인자로 미디어 비디오와 오디오에 대한 constraints 를 지정할 수 있다. 비디오는 resolution, frame rate 에 대해 지정할 수 있다. 자세한 지정 방법은 [https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia) 에서 확인할 수 있다.
+첫번째 인자로 미디어 비디오와 오디오에 대한 constraints 를 지정할 수 있다. 비디오는 resolution, frame rate 에 대해 지정할 수 있다. 자세한 지정 방법은 [https://webrtchacks.com/how-to-figure-out-webrtc-camera-resolutions/](https://webrtchacks.com/how-to-figure-out-webrtc-camera-resolutions/) 에서 확인할 수 있다.
 
 
 #### PeerConnection
@@ -130,6 +152,5 @@ var pc = new PeerConnection({
 ```
 
 
-#### DataChannel
 
 ### ORTC
