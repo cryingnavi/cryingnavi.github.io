@@ -275,11 +275,9 @@ var bodyBuf = new ArrayBuffer(12);
 var bodyDv = new DataView(bodyBuf);
 bodyDv.setFloat64(0, "유니크ID");
 
-var reader = new FileReader(),
-  size = 0,
-  hbuf = null;
+var reader = new FileReader();
 
-reader.onload = utils.bind(function(e){
+reader.onload = function(e){
   bodyDv.setUint16(8, 1); //1 페이지 전송
   var buf = concatBuffer(bodyBuf, e.target.result);
 
@@ -288,7 +286,9 @@ reader.onload = utils.bind(function(e){
 };
 
 var offset = 0;
-var size = offset + chunkSize;
-var slice = file.slice(offset, size);
+var size = offset + chunkSize;  //chunkSize를 지정해야한다.
+var slice = file.slice(offset, size); //파일을 청크사이즈만큼 자른다.
 reader.readAsArrayBuffer(slice);
 ```
+
+코드에서는 첫번째 청크사이즈만큼만 파일을 보냈지만, 이를 변경하여 파일이 전부 보내질때까지 반복하여 보낼 수 있다.
