@@ -224,7 +224,7 @@ for(var i=0; i<dataView.byteLength; i=i+2){
 var headerBuf = new ArrayBuffer(530);
 var headerDv = new DataView(headerBuf);
 headerDv.setFloat64(0, "유니크ID");
-headerDv.setFloat64(12, totalSize);
+headerDv.setFloat64(8, totalSize);
 
 //mimeType 은 2바이트 처리한다.
 for (var i = 16; i<271; i=i+2) {
@@ -257,12 +257,38 @@ websocket.send(headerBuf);
 
 ```
 0 ~ 7 처음 8 바이트까지는 보내는 파일에 대한 유니크한 아이디값
-8 ~ 11 그다음 4바이트는 청크사이즈만큼 자른 후의 보낼 횟수. 곧 페이지의 전체 크기
-12 ~ 15 그다음 4바이트는 현재 보내고 있는 페이지 인덱스. 1씩 증가하면서 페이지의 전체 크기만큼 증가할 것이다.
-16 ~ 청크사이즈만큼 그다음 크기는 청크사이즈만큼 자른 파일을 전송한다.
+8 ~ 11 그다음 4바이트는 현재 보내고 있는 페이지 인덱스. 1씩 증가하면서 페이지의 전체 크기만큼 증가할 것이다.
+15 ~ 청크사이즈만큼 그다음 크기는 청크사이즈만큼 자른 파일을 전송한다.
 ```
 
 파일을 실제 보내보겠다.
-```
 
+```
+function concatBuffer(buf1, buf2){
+  var tmp = new Uint8Array(buf1.byteLength + buf2.byteLength);
+  tmp.set(new Uint8Array(buf1), 0);
+  tmp.set(new Uint8Array(buf2), buf1.byteLength);
+  return tmp.buffer;
+}
+
+var bodyBuf = new ArrayBuffer(12);
+var bodyDv = new DataView(bodyBuf);
+bodyDv.setFloat64(0, "유니크ID");
+
+var reader = new FileReader(),
+  size = 0,
+  hbuf = null;
+
+reader.onload = utils.bind(function(e){
+  bodyDv.setUint16(8, 1); //1 페이지 전송
+  var buf = concatBuffer(bodyBuf, e.target.result);
+
+  //websocket send
+  websocket.send(buf);
+};
+
+var offset = 0;
+var size = offset + chunkSize;
+var slice = file.slice(offset, size);
+reader.readAsArrayBuffer(slice);
 ```
