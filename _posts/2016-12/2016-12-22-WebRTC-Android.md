@@ -4,7 +4,14 @@ title: WebRTC Android
 date: "2016-12-22 14:10"
 ---
 
-WebRTC 를 안드로이드로 빌드 하는 방법에 대해서 알아 본다.
+WebRTC 를 안드로이드로 빌드 하는 방법에 대해서 알아 본다. 아래 과정을 순서대로 따라하면 된다.
+
+### WebRTC android 참고 문서 및 소스
+- https://webrtc.org/
+- webrtc 안드로이드 문서
+  - https://webrtc.org/native-code/android/
+- 소스 주소
+  - https://chromium.googlesource.com/external/webrtc.git
 
 
 ### 준비하기
@@ -14,32 +21,21 @@ WebRTC 를 안드로이드로 빌드 하는 방법에 대해서 알아 본다.
   - ubuntu-16.04.1-desktop-amd64.iso
   - https://www.ubuntu.com/desktop
 
-
-### VirtualBox 설치
-
-
 ### VirtualBox에 ubuntu 설치
+- VirtualBox에 우분투를 설치한다.
 - 설치시 디스크 용량은 최소 60 기가 정도로 잡는다.
 
 ### ubuntu 설정
 - 시스템 -> 프로세서 -> CPU 2개
 - 디스플레이 -> 화면 -> 비디오 메모리 128MB
+- 기타 필요한 설정을 수행한다.
 - 공유폴더설정
 
 ```
 mount -t vboxsf -o uid=1000,gid=1000,dmode=0755,fmode=0755 Shared /home/USER아이디/Shared
 ```
 
-### WebRTC
-- https://webrtc.org/
-- webrtc 안드로이드 문서
-  - https://webrtc.org/native-code/android/
-- 소스 주소
-  - https://chromium.googlesource.com/external/webrtc.git
-
-
-### 컴파일 환경
-#### git 설치
+### git 설치
 
 ```
 apt-get install git
