@@ -121,11 +121,22 @@ ninja -C out_x64/Default AppRTCMobile
 - 안드로이드는 Arm V7 with Neon, Arm 64 두개만 하면 된다.
 - 각각 지정한 폴더 밑으로 빌드본이 생긴다. out/Default, out_arm64/Default
 
-### Android 프로젝트에 포함시키기
+### so 파일 추출하기
+- 원본 so 파일 추출
+  - [src]/out/Default/libjingle_peerconnection_so.so
+- 안드로이드 아키텍처 폴더채로 추출
+  - [src]/out/Default/apks/AppRTCDemo.apk
+  - 압축 해제하여 추출
 
-#### so 파일 추축하기
+### 샘플 프로젝트 위치
+- src/webrtc/examples/androidapp
 
-#### jar 파일 추출하기
+### 샘플 프로젝트 시작하기 1
+- 이클립스에서 안드로이드 프로젝트를 만든다
+- src/webrtc/examples/androidapp 전체를 복사하여 붙여넣기 한다.
+- libs 폴더를 만들어서 아래 파일처럼 추가한다.(이미지 첨부하기)
 
+
+### 샘플 프로젝트 시작하기2
 
 계속 쓸 예정...
