@@ -121,10 +121,6 @@ ninja -C out_x64/Default AppRTCMobile
 - 안드로이드는 Arm V7 with Neon, Arm 64 두개만 하면 된다.
 - 각각 지정한 폴더 밑으로 빌드본이 생긴다. out/Default, out_arm64/Default
 
-### 빌드 실패시
-- 깔끔하게 우분투 설치 과정부터 다시 한다.
-
-
 ### Android 프로젝트에 포함시키기
 
 #### so 파일 추축하기
