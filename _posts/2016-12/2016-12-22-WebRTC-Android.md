@@ -75,32 +75,21 @@ export GYP_DEFINES="OS=android"
 
 ```
 fetch --nohooks webrtc_android
-```
-
-```
 gclient sync
 ```
 
 - 네트워크에 따라 몇 시간 걸림
 - 중간에 라이센스 관련하여 y/n 을 물어본다.
-- Android Tool 설치 시 Google-Play SDK 설치 라이센스 동의 묻는 부분의 대략 11번 항목에서 멈춰 서고 화면에는 보이지 않지만(y/n 을 물어봄) y 를 치고 엔터를 치면 계속 진행함
 
+### 필요라이브러리 설치
 
-### 다운로드 에러시 (거의 에러 발생)
-- 만약 나머지 라이센스 항목이 나오면서 오류가 나는 경우에는 다음과 같이 조치한다.
-- ./setup_links.py 파일을 실행하면 심볼릭 링크가 생성한다. 실행 후 ll 명령어 실행으로 심볼릭 링크가 확인 되지 않으면 ./setup_links.py 를 다시 실행한다.
-
-```
-cd src
-./setup_links.py
-```
-
-- 컴파일시 필요라이브러리 설치를 설치하고 gclient sync 로 다시 다운로드 한다.
+- 컴파일시 필요라이브러리 설치한다.
+- 이는 최초 gclient sync 를 시행하고 그 다음에 수행한다.
+- 폰트는 필요없으니 제외 옵션을 추가한다.
 
 ```
 ./build/install-build-deps.sh  --no-chromeos-fonts
 ./build/install-build-deps-android.sh
-gclient sync
 ```
 
 ### 소스 빌드
@@ -109,28 +98,28 @@ gclient sync
 
 ```
 gn gen out/Default --args='target_os="android" target_cpu="arm" is_debug=false'
-ninja -C out/Default AppRTCDemo
+ninja -C out/Default AppRTCMobile
 ```
 
 - Arm 64 : arm64-v8a (arm 계열의 64비트)
 
 ```
 gn gen out_arm64/Default --args='target_os="android" target_cpu="arm64" is_debug=false'
-ninja -C out_arm64/Default AppRTCDemo
+ninja -C out_arm64/Default AppRTCMobile
 ```
 
 - x86
 
 ```
 gn gen out_x86/Default --args='target_os="android" target_cpu="x86" is_debug=false'
-ninja -C out_x86/Default AppRTCDemo
+ninja -C out_x86/Default AppRTCMobile
 ```
 
 - x64
 
 ```
 gn gen out_x64/Default --args='target_os="android" target_cpu="x64" is_debug=false'
-ninja -C out_x64/Default AppRTCDemo
+ninja -C out_x64/Default AppRTCMobile
 ```
 
 - 안드로이드는 Arm V7 with Neon, Arm 64 두개만 하면 된다.
