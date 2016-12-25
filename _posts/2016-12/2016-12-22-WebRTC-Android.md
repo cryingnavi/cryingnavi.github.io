@@ -16,10 +16,10 @@ WebRTC 를 안드로이드로 빌드 하는 방법에 대해서 알아 본다. �
 
 ### 준비하기
 - VirtualBox
-  - https://www.virtualbox.org/wiki/Downloads
+  - [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
 - ubuntu 16
   - ubuntu-16.04.1-desktop-amd64.iso
-  - https://www.ubuntu.com/desktop
+  - [https://www.ubuntu.com/desktop](https://www.ubuntu.com/desktop)
 
 ### VirtualBox에 ubuntu 설치
 - VirtualBox에 우분투를 설치한다.
