@@ -7,11 +7,11 @@ date: "2016-12-22 14:10"
 WebRTC 를 안드로이드로 빌드 하는 방법에 대해서 알아 본다. 아래 과정을 순서대로 따라하면 된다.
 
 ### WebRTC android 참고 문서 및 소스
-- https://webrtc.org/
+- [https://webrtc.org/](https://webrtc.org/)
 - webrtc 안드로이드 문서
-  - https://webrtc.org/native-code/android/
+  - [https://webrtc.org/native-code/android/](https://webrtc.org/native-code/android/)
 - 소스 주소
-  - https://chromium.googlesource.com/external/webrtc.git
+  - [https://chromium.googlesource.com/external/webrtc.git](https://chromium.googlesource.com/external/webrtc.git)
 
 
 ### 준비하기
