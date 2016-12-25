@@ -29,11 +29,9 @@ WebRTC 를 안드로이드로 빌드 하는 방법에 대해서 알아 본다. �
 - 시스템 -> 프로세서 -> CPU 2개
 - 디스플레이 -> 화면 -> 비디오 메모리 128MB
 - 기타 필요한 설정을 수행한다.
-- 공유폴더설정
+- [공유폴더설정]({{ site.baseurl }}/VirtualBox-Shared-Folder)
 
-```
-mount -t vboxsf -o uid=1000,gid=1000,dmode=0755,fmode=0755 Shared /home/USER아이디/Shared
-```
+
 
 ### git 설치
 
@@ -132,8 +130,17 @@ ninja -C out_x64/Default AppRTCMobile
 - src/webrtc/examples/androidapp
 
 ### 샘플 프로젝트 시작하기 1
-- 이클립스에서 안드로이드 프로젝트를 만든다
-- src/webrtc/examples/androidapp 전체를 복사하여 붙여넣기 한다.
+- 버츄얼 박스 밖의 원래 사용하고 있는 OS 의 이클립스에서 안드로이드 프로젝트를 만든다
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step01.png)
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step02.png)
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step03.png)
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step04.png)
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step05.png)
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step06.png)
+
+
+
+- src/webrtc/examples/androidapp 전체를 공유 폴더로 복사하고 이를 다시 프로젝트에 복사하여 프로젝트 전체를 덮어쓰기한다.
 - libs 폴더를 만들어서 아래 파일처럼 추가한다.(이미지 첨부하기)
 
 
