@@ -123,7 +123,7 @@ ninja -C out_x64/Default AppRTCMobile
 - 원본 so 파일 추출
   - [src]/out/Default/libjingle_peerconnection_so.so
 - 안드로이드 아키텍처 폴더채로 추출
-  - [src]/out/Default/apks/AppRTCDemo.apk
+  - [src]/out/Default/apks/AppRTCMobile.apk
   - 압축 해제하여 추출
 
 ### 샘플 프로젝트 위치
@@ -138,10 +138,14 @@ ninja -C out_x64/Default AppRTCMobile
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step05.png)
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step06.png)
 
-
+- 프로젝트가 생성되었다면 프로젝트의 전체를 삭제한다.
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step07.png)
 
 - src/webrtc/examples/androidapp 전체를 공유 폴더로 복사하고 이를 다시 프로젝트에 복사하여 프로젝트 전체를 덮어쓰기한다.
-- libs 폴더를 만들어서 아래 파일처럼 추가한다.(이미지 첨부하기)
+- 샘플 프로젝트에서 libs 폴더를 만든다.
+- webrtc 를 빌드한 우분투로 돌아가서 빌드한 apk 를 찾아 압축을 해제한다. 경로 및 파일명은 Arm V7 with Neon, Arm 64 두 개를 빌드 했을 경우 out/Default/apks/AppRTCMobile.apk 와 out_arm64/Default/apks/AppRTCMobile.apk 이다.
+- 압축을 해제하고 생긴 lib 폴더에서 각각 armeabi-v7a, arm64-v8a 폴더를 공유 폴더로 복사한다.
+
 
 
 ### 샘플 프로젝트 시작하기2
