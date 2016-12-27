@@ -57,7 +57,8 @@ rec.ondataavailable = function(){
   chunks.push(e.data);
 };
 
-rec.start(3000); 3초 주기로 레코딩을 시작함. 3초마다 ondataavailable 가 호출된다.
+//3초 주기로 레코딩을 시작함. 3초마다 ondataavailable 가 호출된다.
+rec.start(3000);
 ```
 
 - start 메소드 호출시 인자로 timeslice 을 전달한다. 예를 들어 3000 을 전달하면 미디어 레코더 객체는 3초동안 레코딩 데이터를 수집하여 ondataavailable 를 호출한다.
