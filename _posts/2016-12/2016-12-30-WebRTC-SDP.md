@@ -160,21 +160,21 @@ s=-
 t=0 0
 ```
 
-- 세션이 활성화 되었을 시간을 의미한다. 각각 start time 과 end time 이다. 0 0 은 고정 세션을 의미한다.
+- 세션이 활성화 되었을 시간을 의미한다. 각각 start time 과 end time 이다. 0 0 은 고정 세션을 의미한다. 이는 세션 만료 없이 영구적임을 의미한다.
 
 
 ```
 a=group:BUNDLE audio video data
 ```
 
-- 번들 그룹핑은 몇몇 미디어 라인들간에 관계를 형성 한다. 예를 들어 audio video 라고 기술되어 있다면, 이는 datachannel없이 audio video 를 사용하고 있음을 의미한다. 또한 audio 만 기술되어 있다면 SDP내에 audio 에 대한 설명만 존재한다고 할 수 있다.
+- 번들 그룹핑은 SDP 내에 있는 미디어 라인들간에 관계를 형성 한다. 예를 들어 audio video 라고 기술되어 있다면, 이는 datachannel없이 audio와 video 에 관한 라인들이 있음을 의미한다. 즉 audio, video 만 사용됨을 의미한다.
 
 ```
 a=msid-semantic: WMS vrogvdX9SLeto3IhVm6C1cFS2fRIFqRMlPzd
 ```
 
-- 이 라인은 PeerConnection 의 수명동안 식별자를 부여한다.
-
+- WebRTC 의 Peer 간 통신은 [WebRTC Media Stream(WMS)](https://w3c.github.io/mediacapture-main/getusermedia.html#stream-api) 을 통해 이뤄지는데, 이는 MediaStreamTracks 을 포함하고 있다. 하나의 MediaStreamTrack는 일반적으로 RTP 세션내 단일 SSRC를 사용하여 전송한다.
+- 좀더 추가적이 조사가 필요함.
 
 ### SDP 상세 설명 (Audio Lines)
 
@@ -183,16 +183,57 @@ m=audio 9 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 126
 ```
 
 - m 은 미디어라인을 의미한다. 이는 오디오 스트림에 관한 속성들에 대한 정보들을 가지고 있다. 순서는 아래와 같다
-- 미디어 타입 (여기서는 audio)
-- UDP/TLS/RTP/SAVPF 는 사용되어지는 프로토콜에 대한 기술이다
-- 111 103 104 9 0 8 126 는 브라우저에서 미디어를 보내고 받을 수 있는 미디어 형식을 가리킨다. 해당 번호에 대한 상세 설명은 아래에 나온다.
+- 미디어 타입 (audio)
+- 포트 번호 (9)
+- 형식을 일컫는다 곧 사용되어지는 프로토콜이다 (UDP/TLS/RTP/SAVPF)
+- 브라우저에서 미디어를 보내고 받을 수 있는 미디어 형식을 가르키는데 이는 프로파일 번호이다. 프로파일 번호에 해당하는 상세 설명은 아래와 같다(111 103 104 9 0 8 126)
 
 
 ```
 c=IN IP4 0.0.0.0
 ```
 
-- c 는 연결에 관한 라인이다.
+- c 는 실시간 트래픽을 보내고 받을 IP를 제공합니다. 그러나 ICE 에서 이미 IP 가 제공 되고 있으므로 c 라인의 IP 는 사용되지 않는다.
+
+```
+a=rtcp:9 IN IP4 0.0.0.0
+```
+
+- 이 행은 RTCP에 사용될 IP 및 포트를 지정합니다. RTCP multiplex가 지원되므로 SRTP와 동일한 포트입니다.
+
+
+```
+a=ice-ufrag:eWXl
+a=ice-pwd:57FcQfoChjtjaMlHOlp6TPGE
+```
+
+- ICE Parameter 이다.
+- ICE candidate 가 교환되면, 서로를 확인하는 프로세스가 시작된다.
+- ice-ufgra 과 ice-pwd는 해당 프로세스에 사용되어 세션과 관련되지 않는 잠재적인 공격을 받지 않도록 한다.
+
+
+```
+a=fingerprint:sha-256 EB:E1:55:0E:41:99:0C:C0:CC:C8:43:9B:99:11:F9:A1:4D:77:5C:A1:BF:70:78:B0:19:30:04:D8:D3:11:DC:0D
+```
+
+- DTLS Parameters 이다.
+- DTLS-SRTP 협상에 사용되는 인증서의 해시 함수 (이 경우 sha-256 사용)의 결과이다.
+
+```
+a=setup:actpass
+```
+
+- DTLS Parameters 이다.
+- 이 매개 변수는 Peer가 DTLS 협상을 시작하는 서버 또는 클라이언트가 될 수 있음을 의미합니다. RFC4145에 의해 정의 되었으며 RFC4572에 의해 업데이트되었습니다.
+
+
+```
+a=mid:audio
+```
+
+- 
+
+
 
 
 
