@@ -247,6 +247,7 @@ a=sendrecv
 
 - 미디어의 방향을 표시한다.
 - SDP 를 생성할 때 사용하는 createOffer, createAnswer 함수의 option 지정을 통해 sendonly, recvonly 형태로 변경할 수 있다.
+- 만약, MCU 서버와 연결한다면, MCU의 지원 사양에 따라 이를 sendonly, recvonly 형태로 선언해야하는 경우도 존재한다.
 
 ```
 a=rtpmap:111 opus/48000/2
