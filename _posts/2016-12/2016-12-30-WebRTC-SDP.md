@@ -4,7 +4,7 @@ title: WebRTC SDP
 date: "2016-12-30 10:39"
 ---
 
-WebRTC 의 SDP 에 대해서 자세히 알아본다. SDP란 Session Description Protocol 의 약자로 연결하고자 하는 Peer간 서로간의 미디어와 네트워크에 관한 정보를 이해하기 위해 사용된다.
+WebRTC 의 SDP 에 대해서 자세히 알아본다. SDP란 Session Description Protocol 의 약자로 연결하고자 하는 Peer 서로간의 미디어와 네트워크에 관한 정보를 이해하기 위해 사용된다.
 
 ### Offer SDP
 - 먼저 연결하고자 하는 Peer 가 만든 SDP 를 일컫는다.
