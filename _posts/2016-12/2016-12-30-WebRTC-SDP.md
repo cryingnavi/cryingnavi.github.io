@@ -4,7 +4,7 @@ title: WebRTC SDP
 date: "2016-12-30 10:39"
 ---
 
-WebRTC 의 SDP 에 대해서 자세히 알아본다.
+WebRTC 의 SDP 에 대해서 자세히 알아본다. SDP란 Session Description Protocol 의 약자로 연결하고자 하는 Peer간 서로간의 미디어와 네트워크에 관한 정보를 이해하기 위해 사용된다.
 
 ### Offer SDP
 - 먼저 연결하고자 하는 Peer 가 만든 SDP 를 일컫는다.
@@ -40,7 +40,7 @@ RTCPeerConnection.createAnswer([options]).then(successCallback).catch(failureCal
 
 ### SDP 전체 전문 보기
 - Offer SDP 의 전문이다.
-- 전체 전문을 바탕으로 그 의미를 아는 것들에 대해서만 설명한다.
+- 전체 전문을 바탕으로 그 의미를 아는 것들에 대해서만 아래에서 설명한다.
 
 ```
 v=0
