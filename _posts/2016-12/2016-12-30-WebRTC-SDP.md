@@ -35,8 +35,7 @@ RTCPeerConnection.createAnswer([options]).then(successCallback).catch(failureCal
 ```
 
 ### adapter.js
-- 위와 같이 브라우저별 또는 브라우저 버전별 일부 다른 API 사용법을 일관되게 사용하게 해주는 것이 adapter.js 이다.
-- 이를 적용하면 SDP 검출시 Promise 를 일괄적으로 사용할 수 있다.
+- WebRTC 에서 위와 같이 브라우저별 또는 브라우저 버전별 일부 다른 API 사용법을 일관되게 사용하게 해주는 것이 adapter.js 이다. 이를 적용하면 SDP 검출시 Promise 를 일괄적으로 사용할 수 있다.
 
 ### SDP 전체 전문 보기
 - Offer SDP 의 전문이다.
