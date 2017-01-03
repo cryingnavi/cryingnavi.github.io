@@ -40,7 +40,7 @@ RTCPeerConnection.createAnswer([options]).then(successCallback).catch(failureCal
 
 ### SDP 전체 전문 보기
 - Offer SDP 의 전문이다.
-- 전체 전문을 바탕으로 아래에서 한줄 한줄 의미를 파악해 보겠다.
+- 전체 전문을 바탕으로 그 의미를 아는 것들에 대해서만 설명한다.
 
 ```
 v=0
@@ -146,8 +146,13 @@ v=0
 o=- 6137031273746274589 2 IN IP4 127.0.0.1
 ```
 
-- SDP를 생성한 Peer의 식별자. user name(생략됨), session id, session version, network type, address type, unicast address 순이다.
-- user name 이 - 으로 생략되었지만 문자열 파싱을 통해 어플리케이션에서 user name 을 추가할 수 있다.
+- SDP를 생성한 Peer의 식별자. 순서는 아래와 같다.
+- user name(생략됨), session id, session version, network type, address type, unicast address 순이다.
+- user name 이 - 으로 생략되었지만 문자열 파싱을 통해 어플리케이션에서 user name 을 추가할 수 있다. 이를 추가하면 아래와 같다
+
+```
+o=Jack 6137031273746274589 2 IN IP4 127.0.0.1
+```
 
 ```
 s=-
@@ -167,14 +172,9 @@ t=0 0
 a=group:BUNDLE audio video data
 ```
 
-- 번들 그룹핑은 SDP 내에 있는 미디어 라인들간에 관계를 형성 한다. 예를 들어 audio video 라고 기술되어 있다면, 이는 datachannel없이 audio와 video 에 관한 라인들이 있음을 의미한다. 즉 audio, video 만 사용됨을 의미한다.
+- 번들 그룹핑은 SDP 내에 있는 미디어 라인들간에 관계를 형성 한다. 예를 들어 audio video 라고 기술되어 있다면, 이는 datachannel없이 audio와 video 에 관한 라인들만 있음을 의미한다. 즉 audio, video만 사용됨을 의미한다.
 
-```
-a=msid-semantic: WMS vrogvdX9SLeto3IhVm6C1cFS2fRIFqRMlPzd
-```
 
-- WebRTC 의 Peer 간 통신은 [WebRTC Media Stream(WMS)](https://w3c.github.io/mediacapture-main/getusermedia.html#stream-api) 을 통해 이뤄지는데, 이는 MediaStreamTracks 을 포함하고 있다. 하나의 MediaStreamTrack는 일반적으로 RTP 세션내 단일 SSRC를 사용하여 전송한다.
-- 좀더 추가적이 조사가 필요함.
 
 ### SDP 상세 설명 (Audio Lines)
 
@@ -187,6 +187,7 @@ m=audio 9 UDP/TLS/RTP/SAVPF 111 103 104 9 0 8 126
 - 포트 번호 (9)
 - 형식을 일컫는다 곧 사용되어지는 프로토콜이다 (UDP/TLS/RTP/SAVPF)
 - 브라우저에서 미디어를 보내고 받을 수 있는 미디어 형식을 가르키는데 이는 프로파일 번호이다. 프로파일 번호에 해당하는 상세 설명은 아래와 같다(111 103 104 9 0 8 126)
+- Peer 간의 협상과정에서 앞에 있는 프로파일 번호를 순서대로 적용한다. 예를 들어 111번에 해당하는 코덱이 상호간에 가능한지 확인하고 가능하지 않다면 103번으로 넘어간다.
 
 
 ```
@@ -231,11 +232,153 @@ a=setup:actpass
 a=mid:audio
 ```
 
-- 
+- BUNDLE 행에 사용되는 식별자이다.
+
+```
+b=AS:32
+```
+
+- 이는 기본으로 검출되는 SDP의 내용이 아니라, 어플리케이션에서 추가한 속성이다.
+- available send 의 약자로 전송 가능한 최대 밴드위드스를 뜻한다.
+- 오디오에 대해 32 kb/s로 최대 밴드위드스를 설정한다는 의미이다.
+
+```
+a=sendrecv
+```
+
+- 미디어의 방향을 표시한다.
+- SDP 를 생성할 때 사용하는 createOffer, createAnswer 함수의 option 지정을 통해 sendonly, recvonly 형태로 변경할 수 있다.
+
+```
+a=rtpmap:111 opus/48000/2
+```
+
+- opus 코덱에 관한 기술이다
+- 프로파일 번호는 111 이며 48000Hz의 샘플링 주기를 가지며 2채널을 사용한다.
+- 프로파일 번호는 m 미디어라인에서 사용되는 프로파일 번호와 일치한다.
 
 
+```
+a=rtpmap:103 ISAC/16000
+a=rtpmap:104 ISAC/32000
+```
+
+- 각각 ISAC 코덱의 16000Hz 샘플링주기, 32000Hz 샘플링 주기를 뜻한다.
 
 
+### SDP 상세 설명 (Video Lines)
+
+```
+m=video 9 UDP/TLS/RTP/SAVPF 100 101 107 116 117 96 97 99 98
+```
+
+- m 은 미디어라인을 의미한다. 이는 비디오 스트림에 관한 속성들에 대한 정보들을 가지고 있다.
+- 순서는 오디오와 같다.
+
+### SDP 상세 설명 (Data Lines)
+
+```
+m=application 9 DTLS/SCTP 5000
+```
+
+- m 은 미디어라인을 의미한다. 이는 데이터 스트림에 관한 속성들에 대한 정보들을 가지고 있다.
+- 순서는 오디오와 같다.
 
 
-계속 작성...
+### 밴드위드스 설정하기
+- createOffer, createAnswer 함수를 통해 SDP 를 생성했다면, 어플리케이션에서 필요에 따라 밴드위드스를 설정할 수 있다
+- b=AS 를 설정하는 방법은 아래와 같다.
+
+```
+function spdToAddBandwidth(sdp){
+  //bundle 검색
+  var bundles = sdp.match(/a=group:BUNDLE (.*)?\r\n/);
+  if(bundles){
+    if(bundles[1]){
+      bundles = bundles[1].split(" ");
+    }
+    else{
+      return sdp;
+    }
+  }
+  else{
+    return sdp;
+  }
+
+  //각 미디어의 밴드위드스 설정값
+  var maxab = 32,
+    maxvb = 1500,
+    maxdb = 1638400;
+
+  //혹시 이미 설정되어 있다면 삭제한다.
+  sdp = sdp.replace(/b=AS([^\r\n]+\r\n)/g, "");
+
+  //번들 네임의 경우 브라우저마다 차이가 존재하므로 아래와 같이 처리한다.
+  //chrome : audio video data
+  //firefox : sdparta_0 sdparta_1 sdparta_2
+  for(var i=0; i<bundles.length; i++){
+    if(bundles[i] === "audio" || bundles[i] === "sdparta_0"){
+      sdp = sdp.replace("a=mid:"+bundles[i]+"\r\n", "a=mid:"+bundles[i]+"\r\nb=AS:" + maxab + "\r\n");
+    }else if(bundles[i] === "video" || bundles[i] === "sdparta_1"){
+      sdp = sdp.replace("a=mid:"+bundles[i]+"\r\n", "a=mid:"+bundles[i]+"\r\nb=AS:" + maxvb + "\r\n");
+    }else if(bundles[i] === "data" || bundles[i] === "sdparta_2"){
+      sdp = sdp.replace("a=mid:"+bundles[i]+"\r\n", "a=mid:"+bundles[i]+"\r\nb=AS:" + maxdb + "\r\n");
+    }
+  }
+
+  return sdp;
+}
+
+//사용
+var newSdp = spdToAddBandwidth(oldSdp);
+```
+
+
+### 적용 코덱 우선순위 설정하기
+
+- Peer 간의 협상과정에서 서로간에 적용할 수 있는 코덱의 우선순위를 변경 설정할 수 있다.
+- 비디오를 예를 들어 VP8 코덱이 아닌 H.264 를 우선 적용하고 싶다면, H.264에 해당하는 프로파일 번호를 가장 앞으로 변경할 수 있다.
+- 아래에서 H.264는 107 이다. 107을 100번 앞으로 변경하면 된다.
+
+```
+m=video 9 UDP/TLS/RTP/SAVPF 100 101 107 116 117 96 97 99 98
+```
+
+```
+function sdpToReplacePreferCodec(sdp, mLineReg, preferCodec){
+  var mLine,
+    newMLine = [],
+    sdpCodec,
+    mLineSplit,
+    reg = new RegExp("a=rtpmap:(\\d+) " + preferCodec + "/\\d+");
+
+  mLine = sdp.match(mLineReg);
+  if(!mLine){
+    return sdp;
+  }
+
+  sdpCodec = sdp.match(reg);
+  if(!sdpCodec){
+    return sdp;
+  }
+
+  mLine = mLine[0];
+  sdpCodec = sdpCodec[1];
+
+  mLineSplit = mLine.split(" ");
+  newMLine.push(mLineSplit[0]);
+  newMLine.push(mLineSplit[1]);
+  newMLine.push(mLineSplit[2]);
+  newMLine.push(sdpCodec);
+
+  for(var i=3; i<mLineSplit.length; i++){
+    if(mLineSplit[i] !== sdpCodec){
+      newMLine.push(mLineSplit[i]);
+    }
+  }
+
+  return sdp.replace(mLine, newMLine.join(" "));
+}
+
+var newSdp = sdpToReplacePreferCodec(oldSdp, /m=video(:?.*)?/, "H264");
+```
