@@ -135,19 +135,49 @@ ninja -C out_x64/Default AppRTCMobile
 - 버츄얼 박스 밖의 원래 사용하고 있는 OS 의 이클립스에서 안드로이드 프로젝트를 만든다
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step01.png)
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step02.png)
-![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step03.png)
-![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step04.png)
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step05.png)
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step06.png)
 
 - 프로젝트가 생성되었다면 프로젝트의 전체를 삭제한다.
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step07.png)
 
-- webrtc 를 빌드한 우분투로 돌아가서 src/webrtc/examples/androidapp 전체를 공유 폴더로 복사하고 이를 다시 원래 사용하고 있던 OS에서 만든 프로젝트에 복사하여 프로젝트 전체를 덮어쓰기한다.
+- webrtc 를 빌드한 우분투로 돌아가서 src/webrtc/examples/androidapp 전체를 공유 폴더로 복사하고 이를 다시 원래 사용하고 있던 OS에서 만든 프로젝트에 복사하여 프로젝트 전체를 덮어쓰기한다.(third_party 폴더와 start_loopback_stubbed_camera_saved_video_out.py는 복사하지 않아도 됨). 그럼 아래 그림처럼 복사되었을 것이다.
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step09.png)
+
+- src 폴더를 빌드 패스에 추가한다.
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step10.png)
+
 - 해당 프로젝트에서 libs 폴더를 만든다.
+![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step11.png)
+
 - webrtc 를 빌드한 우분투로 돌아가서 빌드한 apk 를 찾아 압축을 해제한다. 경로 및 파일명은 Arm V7 with Neon, Arm 64 두 개를 빌드 했을 경우 out/Default/apks/AppRTCMobile.apk 와 out_arm64/Default/apks/AppRTCMobile.apk 이다.
-- 압축을 해제하고 생긴 lib 폴더를 안에 armeabi-v7a 또는 arm64-v8a 라는 폴더가 있을 것이다. 이는 libjingle_peerconnection_so.so 를 담고 있는 폴더이다. 이를 공유 복사한 다음 이클립스에서 만든 프로젝트내 libs 폴더로 복사한다.
-- 다시 out/Default/lib.java/webrtc 폴더 내에서 autobanh_java.jar, base_java.jar, libjingle_peerconnection_java.jar 를 찾아 공유 폴더로 복사하고 다시 jar 파일들을 이클립스에서 만든 프로젝트내 libs 폴더로 복사한다.
+
+- 압축을 해제하고 생긴 lib 폴더를 안에 armeabi-v7a 또는 arm64-v8a 라는 폴더가 있을 것이다. 이는 libjingle_peerconnection_so.so 를 담고 있는 폴더이다. 이를 공유폴더에 복사한 다음 이클립스에서 만든 프로젝트내 libs 폴더로 복사한다.
+
+- 다시 out/Default/lib.java/webrtc 폴더 내에서 autobanh.jar, base_java.jar, libjingle_peerconnection_java.jar 를 찾아 공유 폴더로 복사하고 다시 jar 파일들을 이클립스에서 만든 프로젝트내 libs 폴더로 복사한다.
+
+- 만약 org.appspot.apprtc 패키지 내에서 에러가 발생한다면, 적절하게 수정하여 준다. 나의 경의 AppRTCAudioManager.java과 PeerConnectionClient.java 에서 에러가 발생하였는데 각각의 아래와 같이 수정하였다.
+
+```
+//AppRTCAudioManager.java
+//new HashSet<>();
+//위 HashSet을 아래와 같이 변경하였음
+new HashSet<AudioDevice>();
+```
+
+```
+//PeerConnectionClient.java
+//throw e;
+//에러를 던지는 구문을 아래와 같이 변경하였음
+try {
+		throw e;
+} catch (Exception e1) {
+  // TODO Auto-generated catch block
+  e1.printStackTrace();
+}
+```
+
 - 위 과정을 모두 마치면 아래와 같이 된다.
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step08.png)
+
 - 이제 안드로이드 연결 후에 빌드할 수 있다.
