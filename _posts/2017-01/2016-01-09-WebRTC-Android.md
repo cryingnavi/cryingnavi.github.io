@@ -130,6 +130,7 @@ ninja -C out_x64/Default AppRTCMobile
   - 압축 해제하면 libs 폴더가 존재하고 해당 폴더 안에 so 파일이 존재한다.
 
 ### 샘플 프로젝트 위치
+- 샘플프로젝트는 아래 경로에 존재한다.
 - src/webrtc/examples/androidapp
 
 ### 샘플 프로젝트 시작하기
