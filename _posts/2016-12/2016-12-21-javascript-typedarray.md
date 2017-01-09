@@ -15,7 +15,6 @@ TypedArray 를 사용하기 위해서는 두가지만 기억하면 된다. 바�
 
 
 ### 자료형
-{% marginnote 'table-1-id' '*Table 1*: A table with default style formatting' %}
 <div class="table-wrapper">
   <table class="table-alpha" id="newspaper-tone">
     <thead>
@@ -96,7 +95,6 @@ var view = new DataView(buf);
 DataView 는 다양한 형태의 데이터를 읽고 쓸 수 있다. 뷰를 생성했다면, 뷰의 메소드들을 사용할 수 있다. 뷰의 get/set 메소드들은 아래와 같은 것들이 있다.
 
 #### set
-{% marginnote 'table-1-id' '*Table 1*: A table with default style formatting' %}
 <div class="table-wrapper">
   <table class="table-alpha" id="newspaper-tone">
     <thead>
@@ -142,7 +140,6 @@ DataView 는 다양한 형태의 데이터를 읽고 쓸 수 있다. 뷰를 생�
 </div>
 
 #### get
-{% marginnote 'table-1-id' '*Table 1*: A table with default style formatting' %}
 <div class="table-wrapper">
   <table class="table-alpha" id="newspaper-tone">
     <thead>
