@@ -132,22 +132,27 @@ ninja -C out_x64/Default AppRTCMobile
 - src/webrtc/examples/androidapp
 
 ### 샘플 프로젝트 시작하기
-- 버츄얼 박스 밖의 원래 사용하고 있는 OS 의 이클립스에서 안드로이드 프로젝트를 만든다
+- 버츄얼 박스 밖의 원래 사용하고 있는 OS 의 이클립스에서 안드로이드 프로젝트를 만든다. 별다른 설정변경없이 넥스트,넥스트로 만들면 된다.
+
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step01.png)
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step02.png)
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step05.png)
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step06.png)
 
 - 프로젝트가 생성되었다면 프로젝트의 전체를 삭제한다.
+
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step07.png)
 
 - webrtc 를 빌드한 우분투로 돌아가서 src/webrtc/examples/androidapp 전체를 공유 폴더로 복사하고 이를 다시 원래 사용하고 있던 OS에서 만든 프로젝트에 복사하여 프로젝트 전체를 덮어쓰기한다.(third_party 폴더와 start_loopback_stubbed_camera_saved_video_out.py는 복사하지 않아도 됨). 그럼 아래 그림처럼 복사되었을 것이다.
+
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step09.png)
 
 - src 폴더를 빌드 패스에 추가한다.
+
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step10.png)
 
 - 해당 프로젝트에서 libs 폴더를 만든다.
+
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step11.png)
 
 - webrtc 를 빌드한 우분투로 돌아가서 빌드한 apk 를 찾아 압축을 해제한다. 경로 및 파일명은 Arm V7 with Neon, Arm 64 두 개를 빌드 했을 경우 out/Default/apks/AppRTCMobile.apk 와 out_arm64/Default/apks/AppRTCMobile.apk 이다.
@@ -178,6 +183,7 @@ try {
 ```
 
 - 위 과정을 모두 마치면 아래와 같이 된다.
+
 ![_config.yml]({{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step08.png)
 
 - 이제 안드로이드 연결 후에 빌드할 수 있다.
