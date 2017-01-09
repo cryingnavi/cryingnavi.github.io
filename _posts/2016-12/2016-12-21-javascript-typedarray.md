@@ -15,67 +15,17 @@ TypedArray 를 사용하기 위해서는 두가지만 기억하면 된다. 바�
 
 
 ### 자료형
-<div class="table-wrapper">
-  <table class="table-alpha" id="newspaper-tone">
-    <thead>
-      <tr>
-        <th class="text">이름</th>
-        <th class="text">범위</th>
-        <th class="text">설명</th>
-        <th class="text">Type</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="text">Int8Array</td>
-        <td><div class="number">-128 ~ 127</div></td>
-        <td class="text">부호있는 8비트 정수</td>
-        <td class="text">char</td>
-      </tr>
-      <tr>
-        <td class="text">Uint8Array</td>
-        <td><div class="number">0 ~ 255</div></td>
-        <td class="text">부호없는 8비트 정수</td>
-        <td class="text">unsigned char</td>
-      </tr>
-      <tr>
-        <td class="text">Int16Array</td>
-        <td><div class="number">-32,768 ~ 32,767</div></td>
-        <td class="text">부호있는 16비트 정수</td>
-        <td class="text">short</td>
-      </tr>
-      <tr>
-        <td class="text">Uint16Array</td>
-        <td><div class="number">0 ~ 65,535</div></td>
-        <td class="text">부호없는 16비트 정수</td>
-        <td class="text">unsigned short</td>
-      </tr>
-      <tr>
-        <td class="text">Int32Array</td>
-        <td><div class="number">-2,147,483,648 ~ 2,147,483,647</div></td>
-        <td class="text">부호있는 32비트 정수</td>
-        <td class="text">int</td>
-      </tr>
-      <tr>
-        <td class="text">Uint32Array</td>
-        <td><div class="number">0 ~ 4,294,967,295</div></td>
-        <td class="text">부호없는 32비트 정수</td>
-        <td class="text">unsigned int</td>
-      </tr>
-      <tr>
-        <td class="text">Float32Array</td>
-        <td><div class="number">-3.4 x 10의 38승 ~ 3.4 x 10의 38승</div></td>
-        <td class="text">32-bit IEEE floating point number</td>
-        <td class="text">float</td>
-      </tr>
-      <tr>
-        <td class="text">Float64Array</td>
-        <td><div class="number">-1.79 x 10의 308승 ~ 1.79 x 10의 308승</div></td>
-        <td class="text">64-bit IEEE floating point number</td>
-        <td class="text">double</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+
+| 이름 | 범위    | 설명     | Type    |
+|:--------|:-------|:--------|:--------|
+| Int8Array | -128 ~ 127 | 부호있는 8비트 정수 | char |
+| Uint8Array | 0 ~ 255 | 부호없는 8비트 정수 | unsigned char |
+| Int16Array | -32,768 ~ 32,767 | 부호있는 16비트 정수 | short |
+| Uint16Array | 0 ~ 65,535 | 부호없는 16비트 정수 |	unsigned short |
+| Int32Array | -2,147,483,648 ~ 2,147,483,647 |	부호있는 32비트 정수 | int |
+| Uint32Array | 0 ~ 4,294,967,295 | 부호없는 32비트 정수 | unsigned int |
+| Float32Array | -3.4 x 10의 38승 ~ 3.4 x 10의 38승 | 32-bit IEEE floating point number | float |
+| Float64Array | -1.79 x 10의 308승 ~ 1.79 x 10의 308승 | 64-bit IEEE floating point number | double |
 
 
 ### Buffer
@@ -95,94 +45,30 @@ var view = new DataView(buf);
 DataView 는 다양한 형태의 데이터를 읽고 쓸 수 있다. 뷰를 생성했다면, 뷰의 메소드들을 사용할 수 있다. 뷰의 get/set 메소드들은 아래와 같은 것들이 있다.
 
 #### set
-<div class="table-wrapper">
-  <table class="table-alpha" id="newspaper-tone">
-    <thead>
-      <tr>
-        <th class="text">이름</th>
-        <th class="text">설명</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="text">setInt8</td>
-        <td class="text">1 바이트 크기의 value 를 설정한다</td>
-      </tr>
-      <tr>
-        <td class="text">setUint8</td>
-        <td class="text">1 바이트 크기의 value 를 설정한다</td>
-      </tr>
-      <tr>
-        <td class="text">setInt16</td>
-        <td class="text">2 바이트 크기의 value 를 설정한다</td>
-      </tr>
-      <tr>
-        <td class="text">setUint16</td>
-        <td class="text">2 바이트 크기의 value 를 설정한다</td>
-      </tr>
-      <tr>
-        <td class="text">setInt32</td>
-        <td class="text">4 바이트 크기의 value 를 설정한다</td>
-      </tr>
-      <tr>
-        <td class="text">setUint32</td>
-        <td class="text">4 바이트 크기의 value 를 설정한다</td>
-      </tr>
-      <tr>
-        <td class="text">setFloat32</td>
-        <td class="text">4 바이트 크기의 value 를 설정한다</td>
-      </tr>
-      <tr>
-        <td class="text">setFloat64</td>
-        <td class="text">8 바이트 크기의 value 를 설정한다</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+
+| 이름 | 설명 |
+| -------- | -------- |
+| setInt8 | 1 바이트 크기의 value 를 설정한다 |
+| setUint8 | 1 바이트 크기의 value 를 설정한다 |
+| setInt16 | 2 바이트 크기의 value 를 설정한다 |
+| setUint16 | 2 바이트 크기의 value 를 설정한다 |
+| setInt32 | 4 바이트 크기의 value 를 설정한다 |
+| setUint32 | 4 바이트 크기의 value 를 설정한다 |
+| setFloat32 | 4 바이트 크기의 value 를 설정한다 |
+| setFloat64 | 8 바이트 크기의 value 를 설정한다 |
 
 #### get
-<div class="table-wrapper">
-  <table class="table-alpha" id="newspaper-tone">
-    <thead>
-      <tr>
-        <th class="text">이름</th>
-        <th class="text">설명</th>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="text">getInt8</td>
-        <td class="text">1 바이트 크기의 value 를 반환한다</td>
-      </tr>
-      <tr>
-        <td class="text">getUint8</td>
-        <td class="text">1 바이트 크기의 value 를 반환한다</td>
-      </tr>
-      <tr>
-        <td class="text">getInt16</td>
-        <td class="text">2 바이트 크기의 value 를 반환한다</td>
-      </tr>
-      <tr>
-        <td class="text">getUint16</td>
-        <td class="text">2 바이트 크기의 value 를 반환한다</td>
-      </tr>
-      <tr>
-        <td class="text">getInt32</td>
-        <td class="text">4 바이트 크기의 value 를 반환한다</td>
-      </tr>
-      <tr>
-        <td class="text">getUint32</td>
-        <td class="text">4 바이트 크기의 value 를 반환한다</td>
-      </tr>
-      <tr>
-        <td class="text">getFloat32</td>
-        <td class="text">4 바이트 크기의 value 를 반환한다</td>
-      </tr>
-      <tr>
-        <td class="text">getFloat64</td>
-        <td class="text">8 바이트 크기의 value 를 반환한다</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+
+| 이름 | 설명 |
+| ----- | ----- |
+| getInt8 | 1 바이트 크기의 value 를 반환한다 |
+| getUint8 | 1 바이트 크기의 value 를 반환한다 |
+| getInt16 | 2 바이트 크기의 value 를 반환한다 |
+| getUint16 | 2 바이트 크기의 value 를 반환한다 |
+| getInt32 | 4 바이트 크기의 value 를 반환한다 |
+| getUint32 | 4 바이트 크기의 value 를 반환한다 |
+| getFloat32 | 4 바이트 크기의 value 를 반환한다 |
+| getFloat64 | 8 바이트 크기의 value 를 반환한다 |
 
 ### 데이터 읽고 쓰기
 생성한 뷰에 데이터를 써보겠다.
