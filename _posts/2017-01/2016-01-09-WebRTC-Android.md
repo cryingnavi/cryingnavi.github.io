@@ -15,7 +15,7 @@ WebRTC 를 안드로이드로 빌드 하는 방법에 대해서 알아 본다. �
 
 
 ### 준비하기
-- 글쓴이는 2012년 형 맥프로에서 빌드환경을 구축하였다.
+- 나의경우, 2012년 형 맥프로에서 빌드환경을 구축하였다.
 - VirtualBox
   - [https://www.virtualbox.org/wiki/Downloads](https://www.virtualbox.org/wiki/Downloads)
 - ubuntu 16
