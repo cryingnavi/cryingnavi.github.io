@@ -190,6 +190,6 @@ try {
 
 - 이제 안드로이드 연결 후에 빌드할 수 있다.
 
-<img src="{{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step12.png" width="300" height="500"></img>
+<img src="{{ site.baseurl }}/images/webrtc-android/webrtc-android-sample01-step12.png" width="300" height="500"/>
 
 - [https://appr.tc/](https://appr.tc/) 사이트 접속하여 채널을 생성하고 안드로이드 샘플 어플에서 접속하면 된다.
