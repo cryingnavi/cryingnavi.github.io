@@ -4,7 +4,7 @@ title: Raspberry Pi Kiosk
 date: "2017-03-05 23:16"
 ---
 
-라즈베리 파이를 키오스크 모드로 돌리는 방법을 알아본다. 현재 해당 문서는 작성 중이며 틈틈히 작성할 계획인다.
+라즈베리 파이를 키오스크 모드로 돌리는 방법을 알아본다. 현재 해당 문서는 작성 중이며 틈틈히 작성할 계획이다.
 
 ### 라즈비안 다운로드
 - [https://www.raspberrypi.org/downloads/raspbian/](https://www.raspberrypi.org/downloads/raspbian/)
