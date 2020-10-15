@@ -26,14 +26,14 @@ navigator.mediaDevices.getDisplayMedia({
 navigator.mediaDevices.getUserMedia({
 	audio: true
 }).then(function(audioStream){
-	//success
+	//오디오 스트림을 얻어냄
 
 	navigator.mediaDevices.getDisplayMedia({
 		audio: true,
 		video: true
 	}).then(function(screenStream){
-		//success
-		screenStream.addTrack(audioStream.getVideoTracks()[0])
+		//스크린 공유 스트림을 얻어내고 여기에 오디오 스트림을 결합함
+		screenStream.addTrack(audioStream.getAudioTracks()[0])
 	}).catch(function(e){
 		//error;
 	});
