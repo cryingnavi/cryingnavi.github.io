@@ -1,7 +1,7 @@
 title: 기술 블로그
 description: 이것저것 기술 블로그.
 author: Heo Young Nam
-avatar: /logo.png
+avatar: /profile.jpeg
 email: cryingnavi@gmail.com
 
 plugins:
@@ -32,7 +32,7 @@ exclude:
 twitter:
   username: cryingnavi
   card: summary
-logo: logo.png
+logo: profile.jpeg
 social:
   name: Heo Young Nam
   links:
