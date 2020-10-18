@@ -2,6 +2,8 @@
 layout: post
 title: Raspberry Pi Kiosk
 date: "2017-03-05 23:16"
+categories: etc
+tags: [raspberry, raspberry pi, kiosk]
 ---
 
 라즈베리 파이를 키오스크 모드로 돌리는 방법을 알아본다.

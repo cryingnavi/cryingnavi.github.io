@@ -2,6 +2,8 @@
 layout: "post"
 title: "Javascript-TypedArray"
 date: "2016-12-21 11:41"
+categories: javascript
+tags: [typedarray, type]
 ---
 
 Javascript 에서는 원시 이진 데이터를 컨트롤 할 수 있다. 이를 Typed Array 라 한다.

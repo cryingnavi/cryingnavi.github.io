@@ -2,6 +2,8 @@
 layout: post
 title: WebRTC Basic
 date: "2016-12-20 11:41"
+categories: webrtc
+tags: [webrtc]
 ---
 
 ### webrtc is
@@ -19,7 +21,7 @@ WebRTC 의 기능을 간편하게 체험할 수 있는 방법이 있으며  아�
 [https://apprtc.appspot.com/](https://apprtc.appspot.com/)
 
 
-![_config.yml]({{ site.baseurl }}/images/webrtc-browser.png)
+![webrtc-browser](/assets/images/2016-12-20/webrtc-browser.png)
 [2016.12.20] 현재 브라우저 지원현황
 
 - Edge 는 ORTC 형태로 지원되며 2016.12.20 현재, WebRTC와 상호 호환되지 않는다. 호환은 작업은 현재 진행중이다.
@@ -29,7 +31,7 @@ WebRTC 의 기능을 간편하게 체험할 수 있는 방법이 있으며  아�
 ### WebRTC 기반 기술 이해하기
 WebRTC 전체 아키텍처 그림을 기반으로 각 용어가 무엇을 의미하는지 살펴본다.
 
-![_config.yml](https://webrtc.org/assets/images/webrtc-public-diagram-for-website.png)
+![diagram](/assets/images/2016-12-20/webrtc-public-diagram-for-website.png)
 
 #### Your Web App
 WebRTC API 를 활용하여 사용자에 의해 구현된 어플리케이션이다. 해당 어플리케이션은 화상, 음성, 또는 메시징(파일, 텍스트) 서비스를 수행하는 어플리케이션이다.
@@ -55,7 +57,7 @@ STUN 서버는 네트웍 장비의 일환이다. 서로 연결하고자 하는 P
 
 이는 server / client 모델이며 STUN Client 는 NAT나 방화벽 뒤에 존재하며 STUN 서버는 공인 IP 망에 존재한다. STUN Client 는 STUN 서버에게 나의 공인 IP 주소는 무엇인가 라고 질의 하게 되고 STUN 서버는 이를 찾아 응답하게 된다. 이렇게 찾아진 공인 IP 를 통해서 peer 간의 통신을 설정하게 됩니다.
 
-![_config.yml]({{ site.baseurl }}/images/Webrtc-stun.png)
+![stun](/assets/images/2016-12-20/Webrtc-stun.png)
 [STUN]
 
 #### TURN
@@ -68,7 +70,7 @@ Peer 간의 모든 트래픽을 중계해 주어야 하므로 상당한 부하�
  - UDP 실패시 TCP로 시도한다.
  - TCP 마저 실패시 모든 정보는 TURN 서버에 의해 릴레이
 
-![_config.yml]({{ site.baseurl }}/images/Webrtc-turn.png)
+![turn](/assets/images/2016-12-20/Webrtc-turn.png)
 [TURN]
 
 #### Candidate
@@ -158,7 +160,7 @@ WebRTC 어플리케이션은 P2P 연결을 위해 시그널링이라는 과정�
 
 시그널 서버는 채팅방과 같은 형태로 연결하고자 하는 Peer 들을 논리적으로 묶고 서로간에 SDP 와 Candidate 를 교환하여 주면 된다.
 
-![_config.yml]({{ site.baseurl }}/images/jsep.png)
+![jsep](/assets/images/2016-12-20/jsep.png)
 
 - Offer SDP 생성
 

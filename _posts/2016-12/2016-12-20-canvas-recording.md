@@ -2,6 +2,8 @@
 layout: post
 title: Canvas Recording
 date: "2016-12-27 13:16"
+categories: javascript
+tags: [canvas, recording, blob, MediaRecorder]
 ---
 
 캔버스를 레코딩하여 비디오 파일(webm)로 다운로드하는 방법에 대해서 알아본다.

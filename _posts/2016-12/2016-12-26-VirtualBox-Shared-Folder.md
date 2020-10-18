@@ -2,6 +2,8 @@
 layout: post
 title: VirtualBox Shared Folder
 date: "2016-12-26 03:10"
+categories: etc
+tags: [virtualbox]
 ---
 
 VirtualBox 에서 공유 폴더를 설정하는 방법에 관하여 알아본다.
@@ -9,7 +11,7 @@ VirtualBox 에서 공유 폴더를 설정하는 방법에 관하여 알아본다
 
 
 ### VirtualBox 관리자에서 공유폴더 설정
-![_config.yml]({{ site.baseurl }}/images/virtualbox-sharedfolder.png)
+![sharedfolder](/assets/images/2016-12-26/virtualbox-sharedfolder.png)
 [설정]
 
 ### 우분투 실행 후 아래 명령어 입력
