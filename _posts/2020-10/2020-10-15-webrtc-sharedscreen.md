@@ -6,7 +6,7 @@ categories: webrtc
 tags: [webrtc]
 ---
 
-WebRTC에서 화면 공유하는 방법을 알아본다.
+WebRTC에서 화면을 공유하는 방법입니다.
 
 ## API
 아래와 같이 화면에 대한 미디어 스트림을 얻을 수 있다.
