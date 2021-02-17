@@ -2,3 +2,13 @@
 ---
 
 @import "hamilton/main";
+
+
+pre.highlight {
+	background: #2e3440;
+}
+
+pre.highlight > code {
+	background: none;
+	color: #f8f8f2;
+}
