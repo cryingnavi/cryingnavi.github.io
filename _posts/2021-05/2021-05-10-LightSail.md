@@ -2,9 +2,9 @@
 layout: post
 title: 라이트세일아 cafe24도메인 등록하기
 date: "2021-05-10 12:00"
-categories: javascript
-tags: [lightsail]
-published: false
+categories: hosting
+tags: [lightsail, cafe24, domain, hosting]
+published: true
 ---
 
 ## 개요
