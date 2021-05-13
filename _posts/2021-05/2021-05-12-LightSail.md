@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Putty로 아마존 라이트세일서버에 접속하기
-date: "2021-05-10 12:00"
+title: Putty로 아마존 라이트세일 서버에 접속하기
+date: "2021-05-12 20:00"
 categories: server
 tags: [lightsail, aws, putty, terminal]
 published: true
