@@ -2,8 +2,8 @@
 layout: post
 title: 아마존 라이트세일에 cafe24 도메인 등록하기
 date: "2021-05-10 12:00"
-categories: hosting
-tags: [lightsail, cafe24, domain, hosting]
+categories: server
+tags: [aws, lightsail, cafe24, domain, hosting]
 published: true
 ---
 
