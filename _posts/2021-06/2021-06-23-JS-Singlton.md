@@ -53,10 +53,10 @@ let o1 = new Animal();
 let o2 = new Animal();
 
 console.log(o1 === o2);
-
+```
 Animal 생성자가 처음 호출되면 내부에서 <code>const animal = this;</code> 클로저 변수를 선언합니다. 그리고 Animal 생성자 함수를 새로운 생성자 함수로 변경합니다. 해당 함수는 <code>const animal</code> 클로저 변수를 반환합니다.  
 객체 리터널만으로도 싱글톤 객체를 생성할 수 있으니, 해당 방법은 그다지 유용한거 같지는 않습니다. 다음으로 더 유용한 방법을 보겠습니다.
-```
+
 
 #### 즉시 실행 함수를 이용한 방법
 ```
