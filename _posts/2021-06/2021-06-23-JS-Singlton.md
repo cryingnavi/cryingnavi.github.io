@@ -162,7 +162,26 @@ MyNameSpace.Page2 = { };
 MyNameSpace.Page3 = { };
 ```
 
-과거 널리 사용되는 SPA 프레임웍이 없을때, 자체 구현하던 SPA 프레임웍에서는 위와 같이 페이지 단위의 구분하여 사용하기도 했습니다.  
+과거 널리 사용되는 SPA 프레임웍이 없을때, 자체 구현하던 SPA 프레임웍에서는 위와 같이 페이지 단위의 구분하여 사용하기도 했습니다.
+
+
+
+### ES2019로 싱글톤 만들기
+```
+class Animal {
+  #animal = null;
+
+  static getInstance() {
+    if (this.animal == null) {
+        this.animal = new Animal();
+    }
+    return this.animal
+  }
+}
+
+console.log(Animal.getInstance() === Animal.getInstance());
+```
+ES2019에서는 # prefix 를 추가해 private class 필드를 선언할 수 있습니다다. 이를 이용해 위와 같이 작성할 수 있습니다.
 
 
 다음에는 팩토리 패턴에 대해 알아봅니다.
